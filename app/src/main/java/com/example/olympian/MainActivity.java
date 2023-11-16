@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity{
-    private Button btnLogout;
+    private Button btnLogout,btnAtrasmusica,btnAdelantemusica,btnPausarmusica;
     private FirebaseAuth mAuth;
     private RecyclerView recyclerView;
     private RutinaAdapter rutinaAdapter;
@@ -32,6 +33,9 @@ public class MainActivity extends AppCompatActivity{
     private FirebaseFirestore db;
     private FirebaseStorage storage;
     private StorageReference storageRef;
+    private TextView textotitulo;
+    private boolean isPlaying = false;
+
 
 
     @Override
@@ -40,9 +44,26 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
         btnLogout = findViewById(R.id.btnLogout);
+        btnAtrasmusica = findViewById(R.id.btnantes);
+        btnPausarmusica = findViewById(R.id.btnpausar);
+        btnAdelantemusica = findViewById(R.id.btndespues);
+        textotitulo = findViewById(R.id.txtmusictitulo);
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
-
+        btnPausarmusica.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isPlaying) {
+                    // Cambiar el icono a "ic_media_play"
+                    //btnPausarmusica.setBackgroundResource(R.drawable.ic_media_play);
+                    isPlaying = false;
+                } else {
+                    // Cambiar el icono a "ic_media_pause"
+                    //btnPausarmusica.setBackgroundResource(R.drawable.ic_media_pause);
+                    isPlaying = true;
+                }
+            }
+        });
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
