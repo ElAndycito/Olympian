@@ -33,11 +33,11 @@ public class MainActivity extends AppCompatActivity{
     private FirebaseStorage storage;
     private StorageReference storageRef;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         mAuth = FirebaseAuth.getInstance();
         btnLogout = findViewById(R.id.btnLogout);
         storage = FirebaseStorage.getInstance();
@@ -46,26 +46,24 @@ public class MainActivity extends AppCompatActivity{
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mAuth.signOut();
+                FirebaseAuth.AuthStateListener authStateListener = new FirebaseAuth.AuthStateListener() {
+                    @Override
+                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                        if (firebaseAuth.getCurrentUser() != null) {
+                            mAuth.signOut();
+                            finish();
+                        }
+                    }
+                };
+                mAuth.addAuthStateListener(authStateListener);
                 checkUserAndRedirect();
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }
         });
-
         checkUserAndRedirect();
     }
 
     private void checkUserAndRedirect() {
-        FirebaseAuth.AuthStateListener authStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if (firebaseAuth.getCurrentUser() == null || firebaseAuth.getCurrentUser().isAnonymous()) {
-                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                    finish();
-                }
-            }
-        };
-        mAuth.addAuthStateListener(authStateListener);
-
         db = FirebaseFirestore.getInstance();
 
         rutinaList = new ArrayList<>();
@@ -74,8 +72,7 @@ public class MainActivity extends AppCompatActivity{
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         rutinaAdapter = new RutinaAdapter(rutinaList);
         recyclerView.setAdapter(rutinaAdapter);
-        cargarRutinasDesdeFirestore();
-    }
+        cargarRutinasDesdeFirestore();}
 
     private void cargarRutinasDesdeFirestore() {
         db.collection("rutinas")

@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         btn_login_anonymous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loginAnonymous();
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
             }
         });
 
