@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity{
                     //btnPausarmusica.setBackgroundResource(R.drawable.ic_media_pause);
                     isPlaying = true;
                 }
-            }
+            }//BORRAR ESTE TILÍN
         });
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
