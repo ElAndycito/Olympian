@@ -48,11 +48,10 @@
             android:id="@+id/txtmusictitulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
             android:gravity="center_horizontal"
             android:text="TextView"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -64,10 +63,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#FF5722"
-                app:icon="@android:drawable/ic_media_previous"
-                app:iconSize="23dp"
-                app:iconTint="#FFFFFF" />
+                android:backgroundTint="#00000000"
+                app:icon="@drawable/atras"
+                app:iconSize="30dp"
+                app:iconTint="#FF5722" />
 
             <Button
                 android:id="@+id/invi2"
@@ -78,13 +77,12 @@
 
             <Button
                 android:id="@+id/btnpausar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="49dp"
                 android:layout_weight="1"
                 android:backgroundTint="#FF5722"
-                app:icon="@android:drawable/ic_media_play"
-                app:iconSize="23dp"
-                app:iconTint="#FFFFFF" />
+                app:iconSize="25dp"
+                app:iconTint="#FF5722" />
 
             <Button
                 android:id="@+id/invi"
@@ -98,10 +96,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#FF5722"
-                app:icon="@android:drawable/ic_media_next"
-                app:iconSize="23dp"
-                app:iconTint="#FFFFFF" />
+                android:backgroundTint="#00FF5722"
+                android:rotation="180"
+                app:icon="@drawable/atras"
+                app:iconSize="30dp"
+                app:iconTint="#FF5722" />
         </LinearLayout>
 
     </LinearLayout>
